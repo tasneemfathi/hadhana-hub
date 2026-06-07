@@ -67,68 +67,6 @@ scales: **Laravel 11 + PostgreSQL + Tailwind CSS**.
 
 ---
 
-## ⚙️ Getting Started
-
-### Requirements
-- PHP **8.2+**
-- Composer
-- PostgreSQL **13+**
-
-### Installation
-
-```bash
-# 1. Clone
-git clone https://github.com/<your-username>/hadhana-hub.git
-cd hadhana-hub
-
-# 2. Install PHP dependencies
-composer install
-
-# 3. Environment
-cp .env.example .env
-php artisan key:generate
-
-# 4. Configure your PostgreSQL credentials in .env
-#    DB_CONNECTION=pgsql
-#    DB_DATABASE=hadhana_hub
-#    DB_USERNAME=postgres
-#    DB_PASSWORD=postgres
-
-# 5. Create the database (once)
-createdb hadhana_hub   # or: CREATE DATABASE hadhana_hub; in psql
-
-# 6. Migrate & seed sample data
-php artisan migrate --seed
-
-# 7. Run
-php artisan serve
-```
-
-Then open **http://localhost:8000**.
-
-| Route             | Description                          |
-|-------------------|--------------------------------------|
-| `/`               | Public directory (search + filter)   |
-| `/nurseries/{id}` | Nursery profile                      |
-| `/submit`         | Register-your-nursery form           |
-| `/admin`          | Admin review workspace               |
-| `/lang/ar` `/lang/en` | Switch language (RTL / LTR)      |
-
----
-
-## 🌍 Localization & RTL
-
-The active locale is resolved by `App\Http\Middleware\SetLocale` (session-driven, Arabic by default).
-Switching language updates both the translation strings and the document direction:
-
-```blade
-<html lang="{{ app()->getLocale() }}" dir="{{ $isRtl ? 'rtl' : 'ltr' }}">
-```
-
-Translations live in `lang/ar.json` and `lang/en.json`. The Arabic UI uses the **Cairo** typeface;
-English uses **Poppins**. Logical CSS properties (`start` / `end`) keep the layout correct in both directions.
-
----
 
 ## 🔐 Security Notes
 
@@ -139,34 +77,6 @@ English uses **Poppins**. Logical CSS properties (`start` / `end`) keep the layo
 
 ---
 
-## 🧪 Testing
-
-```bash
-php artisan test
-```
-
-Feature tests cover the directory listing, search filtering, and submission creation
-(`tests/Feature/DirectoryTest.php`). Tests run against an in-memory SQLite database (see `phpunit.xml`),
-so no PostgreSQL instance is required for CI.
-
----
-
-## 🗂️ Project Structure
-
-```
-app/
-├── Http/Controllers/        # Nursery, Submission, Admin/Dashboard
-├── Http/Middleware/         # SetLocale (locale + RTL)
-└── Models/                  # Nursery, Submission
-database/
-├── migrations/              # nurseries, submissions (+ framework tables)
-└── seeders/                 # sample nurseries & submissions
-lang/                        # ar.json, en.json
-resources/views/             # layout, home, nursery profile, form, admin
-routes/web.php
-```
-
----
 
 ## 🛣️ Roadmap (Phase 2)
 
